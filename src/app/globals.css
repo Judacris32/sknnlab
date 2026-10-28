@@ -1,0 +1,258 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------
+   Brand tokens (from the SKNN LAB light / dark colour sheet)
+   Stored as RGB channels so Tailwind opacity modifiers work.
+------------------------------------------------------------------- */
+@layer base {
+  :root {
+    --bg: 251 247 239; /* #FBF7EF  background ivory */
+    --surface: 255 255 255; /* #FFFFFF  surface white */
+    --soft: 241 225 207; /* #F1E1CF  soft beige */
+    --primary: 212 175 124; /* #D4AF7C  primary gold */
+    --primary-hover: 200 155 98; /* #C89B62  secondary warm brown */
+    --accent: 166 124 82; /* #A67C52  accent warm brown */
+    --ink: 62 47 37; /* #3E2F25  headings */
+    --text: 122 91 58; /* #7A5B3A  body text */
+    --eyebrow: 142 101 53; /* deepened gold for small labels (AA contrast) */
+    --line: 228 211 189; /* hairlines */
+    --deep: 46 35 28; /* #2E231C  dark feature sections */
+    --on-primary: 46 35 28; /* text on gold buttons */
+
+    /* Section background tones used to alternate sections */
+    --tone: 241 225 207; /* #F1E1CF soft beige */
+    --tone-2: 246 237 225; /* #F6EDE1 light sand */
+    --deep-section: 46 35 28; /* #2E231C espresso */
+
+    /* How much of the dark wash sits over hero photos (0 = none, 1 = solid).
+       Lower = more of the photo shows through. */
+    --hero-wash: 0.42;
+    color-scheme: light;
+  }
+
+  .dark {
+    --bg: 46 35 28; /* #2E231C */
+    --surface: 62 47 37; /* #3E2F25 */
+    --soft: 77 59 46; /* #4D3B2E */
+    --primary: 188 147 94; /* #BC935E */
+    --primary-hover: 212 175 124; /* #D4AF7C */
+    --accent: 166 120 74; /* #A6784A */
+    --ink: 246 233 217; /* #F6E9D9 */
+    --text: 217 193 164; /* #D9C1A4 */
+    --eyebrow: 212 175 124;
+    --line: 109 82 64; /* #6D5240 */
+    --deep: 30 22 17;
+    --on-primary: 46 35 28;
+    --tone: 62 47 37; /* #3E2F25 */
+    --tone-2: 53 41 33; /* #352921 */
+    --deep-section: 30 22 17; /* #1E1611 */
+    --hero-wash: 0.5;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg font-sans text-text antialiased;
+    font-size: 1.0625rem;
+    line-height: 1.8;
+    transition: background-color 0.4s ease, color 0.4s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-ink;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.04;
+    text-wrap: balance;
+  }
+
+  /* Justified body copy on every screen size. Hyphenation keeps the
+     spacing even on narrow phone screens. */
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    overflow-wrap: break-word;
+  }
+
+  ::selection {
+    background: rgb(var(--primary) / 0.35);
+    color: rgb(var(--ink));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 3px;
+  }
+
+  img {
+    -webkit-user-drag: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Page container: side spacing grows with the screen (20px on phones up to 80px on
+     large screens) and content is capped at a comfortable reading width. */
+  .container {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 5rem);
+  }
+
+  .eyebrow {
+    @apply font-sans text-[0.7rem] font-medium uppercase tracking-eyebrow text-eyebrow;
+    text-align: center;
+  }
+
+  .lead {
+    @apply text-lg leading-[1.85] md:text-[1.2rem];
+  }
+
+  /* Buttons -------------------------------------------------------- */
+  .btn {
+    @apply relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 py-4 font-sans text-[0.78rem] font-medium uppercase tracking-[0.16em] transition-all duration-300 ease-lux focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-bg disabled:pointer-events-none disabled:opacity-60;
+  }
+  .btn svg {
+    @apply shrink-0 transition-transform duration-300 ease-lux;
+  }
+  .btn:hover svg.arrow {
+    transform: translateX(4px);
+  }
+
+  /*
+   * Every button changes BOTH its background and its text colour on hover.
+   * Default page:  gold → deep brown with ivory text (light mode), gold → cream with espresso text (dark mode).
+   * Inside photos and dark sections (.surface-dark): gold → cream with espresso text in both modes.
+   */
+  .btn-primary {
+    @apply bg-primary text-on-primary hover:-translate-y-0.5 hover:bg-ink hover:text-bg hover:shadow-lift;
+  }
+  .surface-dark .btn-primary:hover {
+    @apply bg-cream text-espresso;
+  }
+  .btn-secondary {
+    @apply border border-transparent bg-soft text-ink hover:border-ink hover:bg-ink hover:text-bg;
+    @apply dark:border-primary dark:bg-transparent dark:text-primary dark:hover:border-primary dark:hover:bg-primary dark:hover:text-on-primary;
+  }
+  .btn-ghost {
+    @apply border border-primary bg-transparent text-ink hover:border-ink hover:bg-ink hover:text-bg;
+    @apply dark:border-line dark:hover:border-primary dark:hover:bg-primary dark:hover:text-on-primary;
+  }
+  /* For use over photographs and dark sections */
+  .btn-light {
+    @apply border border-white/60 bg-white/10 text-white backdrop-blur-md hover:border-white hover:bg-white hover:text-espresso;
+  }
+
+  .link-underline {
+    @apply relative inline-flex items-center gap-2 font-sans text-[0.76rem] font-medium uppercase tracking-[0.18em] text-ink transition-colors hover:text-accent dark:hover:text-primary;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-[0.35] bg-primary transition-transform duration-500 ease-lux;
+  }
+  .link-underline:hover::after {
+    @apply scale-x-100;
+  }
+
+  .section {
+    @apply py-24 md:py-32;
+  }
+
+  .hero-wash {
+    background: linear-gradient(
+        180deg,
+        rgba(30, 22, 17, calc(var(--hero-wash) + 0.12)) 0%,
+        rgba(30, 22, 17, calc(var(--hero-wash) - 0.1)) 40%,
+        rgba(30, 22, 17, calc(var(--hero-wash) + 0.02)) 70%,
+        rgba(30, 22, 17, calc(var(--hero-wash) + 0.3)) 100%
+      ),
+      radial-gradient(ellipse 55% 45% at 50% 48%, rgba(30, 22, 17, 0.4), transparent 78%);
+  }
+  .hero-text {
+    text-shadow: 0 2px 24px rgba(30, 22, 17, 0.45);
+  }
+
+  /* Form fields */
+  .field-label {
+    @apply mb-2 block font-sans text-[0.7rem] font-medium uppercase tracking-[0.2em] text-ink;
+  }
+  .field {
+    @apply w-full rounded-xl border border-line bg-surface px-4 py-3.5 font-sans text-base text-ink placeholder:text-text/50 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:bg-soft/40;
+  }
+  .field-error {
+    @apply mt-1.5 text-left font-sans text-sm text-[#B4532A] dark:text-[#E9A27F];
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(var(--primary));
+  }
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  }
+}
+
+/* Lenis smooth scrolling */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@keyframes progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+
+/* Lining figures for prices and numbers set in the display serif */
+.font-display,
+h1,
+h2,
+h3,
+h4 {
+  font-variant-numeric: lining-nums;
+}

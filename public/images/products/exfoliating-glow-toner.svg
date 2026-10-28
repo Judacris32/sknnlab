@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720" width="600" height="720">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7EEE2"/><stop offset="1" stop-color="#E8D2B2"/></linearGradient>
+<radialGradient id="r" cx=".5" cy=".9" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+<rect width="600" height="720" fill="url(#g)"/>
+<circle cx="300" cy="360" r="230" fill="#fff" opacity=".28"/>
+<ellipse cx="300" cy="590" rx="170" ry="22" fill="url(#r)"/>
+<rect x="282" y="160" width="36" height="40" rx="6" fill="#7A5B3A"/><rect x="264" y="196" width="72" height="64" rx="12" fill="#7A5B3A"/><rect x="215" y="255" width="170" height="320" rx="30" fill="#E9C995"/><rect x="215" y="255" width="40" height="320" rx="20" fill="#fff" opacity=".18"/>
+<text x="300" y="410" text-anchor="middle" font-family="Georgia, serif" font-size="22" letter-spacing="4" fill="#3E2F25" opacity=".85">SKNN LAB</text>
+<text x="300" y="440" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="3" fill="#3E2F25" opacity=".7">TONER</text>
+</svg>

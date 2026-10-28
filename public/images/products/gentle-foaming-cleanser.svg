@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 720" width="600" height="720">
+<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1E1CF"/><stop offset="1" stop-color="#E4CBAA"/></linearGradient>
+<radialGradient id="r" cx=".5" cy=".9" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient></defs>
+<rect width="600" height="720" fill="url(#g)"/>
+<circle cx="300" cy="360" r="230" fill="#fff" opacity=".28"/>
+<ellipse cx="300" cy="590" rx="170" ry="22" fill="url(#r)"/>
+<rect x="290" y="150" width="20" height="60" fill="#C89B62"/><rect x="240" y="140" width="80" height="22" rx="8" fill="#C89B62"/><rect x="270" y="205" width="60" height="70" rx="8" fill="#C89B62"/><rect x="225" y="270" width="150" height="305" rx="40" fill="#F6EDE1"/><rect x="225" y="270" width="36" height="305" rx="18" fill="#fff" opacity=".18"/>
+<text x="300" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="22" letter-spacing="4" fill="#3E2F25" opacity=".85">SKNN LAB</text>
+<text x="300" y="450" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="12" letter-spacing="3" fill="#3E2F25" opacity=".7">CLEANSER</text>
+</svg>
