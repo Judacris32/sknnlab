@@ -53,10 +53,10 @@ export const categories: Category[] = [
     eyebrow: "Where every journey begins",
     headline: "Understand your skin before you treat it",
     short: "A close look at your skin and an honest plan for it, in the clinic or online.",
-    image: "/images/clinic/consultation-desk.jpg",
-    imagePosition: "80% 50%",
-    heroImage: "/images/founder/bridget-skin-analysis.jpg",
-    heroPosition: "50% 35%",
+    image: "/images/clinic/consultation-chat.jpg",
+    imagePosition: "50% 62%",
+    heroImage: "/images/clinic/consultation-room.jpg",
+    heroPosition: "50% 58%",
     detailImage: "/images/founder/bridget-at-work.jpg",
     details: {
       about: [
@@ -135,10 +135,10 @@ export const categories: Category[] = [
     eyebrow: "Collagen induction therapy",
     headline: "Smoother, firmer skin, built from within",
     short: "Collagen-boosting treatments for fine lines, acne scars, dark marks and texture.",
-    image: "/images/treatments/microneedling.jpg",
-    imagePosition: "50% 45%",
-    heroImage: "/images/treatments/microneedling.jpg",
-    heroPosition: "50% 45%",
+    image: "/images/treatments/microneedling-session.jpg",
+    imagePosition: "45% 58%",
+    heroImage: "/images/treatments/microneedling-session.jpg",
+    heroPosition: "50% 55%",
     detailImage: "/images/treatments/microneedling-pen.jpg",
     details: {
       about: [

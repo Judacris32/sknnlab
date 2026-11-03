@@ -39,7 +39,7 @@ const values = [
     alt: "A client relaxing during a facial treatment",
     position: "50% 40%",
     title: "Honest results",
-    text: "Beautiful skin takes commitment, not a miracle. We set realistic expectations and stay with you for the whole journey.",
+    text: "We tell you what a treatment can and can't do, set realistic timelines, and stay with you until you see the change.",
   },
   {
     image: "/images/clinic/treatment-room.jpg",
@@ -50,12 +50,6 @@ const values = [
   },
 ];
 
-const firstVisit = [
-  { title: "A warm welcome", text: "Settle into the lounge. There's no rush, and no question is too small." },
-  { title: "Your skin, up close", text: "We examine your skin and talk through your concerns, routine and goals." },
-  { title: "Your treatment", text: "Relax in a private room while we work with care and explain each step." },
-  { title: "Aftercare and next steps", text: "You leave with clear aftercare advice and a plan for what comes next." },
-];
 
 export default function AboutPage() {
   return (
@@ -194,31 +188,6 @@ export default function AboutPage() {
                 </div>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* First visit */}
-      <section className="section">
-        <div className="container grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
-          <Parallax offset={40} className="relative order-2 aspect-[4/5] overflow-hidden rounded-[2rem] lg:order-1">
-            <Image src="/images/founder/bridget-at-work.jpg" alt="Bridget treating a client in natural light" fill sizes="(min-width:1024px) 45vw, 95vw" className="scale-110 object-cover" style={{ objectPosition: "60% 55%" }} />
-          </Parallax>
-          <div className="order-1 lg:order-2">
-            <SectionHeader eyebrow="Your first visit" title="What to expect when you arrive" />
-            <ol className="mt-12 space-y-8">
-              {firstVisit.map((s, i) => (
-                <Reveal as="li" key={s.title} delay={i * 0.08} className="flex gap-6">
-                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border border-primary font-display text-xl italic text-accent dark:text-primary">
-                    {i + 1}
-                  </span>
-                  <div>
-                    <h3 className="text-[1.7rem]">{s.title}</h3>
-                    <p className="mt-1.5">{s.text}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </ol>
           </div>
         </div>
       </section>

@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
-import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Accordion } from "@/components/ui/Accordion";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/motion/Reveal";
-import { generalFaqs } from "@/data/faqs";
 import { site } from "@/config/site";
 import { mapEmbedUrl, mapLinkUrl, whatsappLink } from "@/lib/utils";
 
@@ -105,14 +102,6 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="section bg-tone-2">
-        <div className="container">
-          <SectionHeader eyebrow="Good to know" title="Before you get in touch" />
-          <Reveal className="mx-auto mt-14 max-w-3xl">
-            <Accordion items={generalFaqs} />
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }

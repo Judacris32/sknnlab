@@ -74,14 +74,19 @@
     text-wrap: balance;
   }
 
-  /* Justified body copy on every screen size. Hyphenation keeps the
-     spacing even on narrow phone screens. */
   p {
-    text-align: justify;
-    text-justify: inter-word;
-    hyphens: auto;
-    -webkit-hyphens: auto;
+    text-align: left;
     overflow-wrap: break-word;
+  }
+  /* Body copy is justified from tablet width up. On phones the column is too
+     narrow for even word spacing, so it stays left-aligned there. */
+  @media (min-width: 768px) {
+    p {
+      text-align: justify;
+      text-justify: inter-word;
+      hyphens: auto;
+      -webkit-hyphens: auto;
+    }
   }
 
   ::selection {

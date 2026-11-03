@@ -27,7 +27,7 @@ export default function TreatmentsPage() {
         eyebrow="Menu and prices"
         title="Treatments for every skin story"
         italicFrom={3}
-        subtitle="Clinical skincare for acne, dark spots, ageing and glow. Every price is listed, and every plan is tailored to you."
+        subtitle="Clinical skincare for acne, dark spots, ageing and glow. Clear prices, and every plan tailored to you."
         crumbs={[{ label: "Treatments" }]}
       />
 

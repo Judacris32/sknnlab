@@ -6,11 +6,9 @@ import { TreatmentMarquee } from "@/components/home/TreatmentMarquee";
 import { ConcernExplorer } from "@/components/home/ConcernExplorer";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { Journey } from "@/components/home/Journey";
-import { PhotoMarquee } from "@/components/home/PhotoMarquee";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Accordion } from "@/components/ui/Accordion";
-import { InstagramIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { ScrollWords } from "@/components/motion/ScrollWords";
 import { Parallax } from "@/components/motion/Parallax";
@@ -20,6 +18,23 @@ import { products } from "@/data/products";
 import { generalFaqs } from "@/data/faqs";
 import { site } from "@/config/site";
 import { formatPrice } from "@/lib/utils";
+
+const resultPairs = [
+  {
+    side: "Right side",
+    images: [
+      { src: "/images/results/right-before.jpg", label: "Before" },
+      { src: "/images/results/right-after.jpg", label: "After" },
+    ],
+  },
+  {
+    side: "Left side",
+    images: [
+      { src: "/images/results/left-before.jpg", label: "Before" },
+      { src: "/images/results/left-after.jpg", label: "After" },
+    ],
+  },
+];
 
 export default function HomePage() {
   const consultation = getTreatment("consultation")!;
@@ -88,10 +103,7 @@ export default function HomePage() {
             <Reveal delay={0.15}>
               <div className="mt-8 h-px w-16 bg-primary" />
               <p className="mt-8">
-                {site.founder.name} founded SKNN LAB on a simple belief: skincare should be guided by knowledge and delivered with real care. To her, aestheticians don&apos;t just treat skin. They restore confidence, inspire self-love and help people glow from the inside.
-              </p>
-              <p className="mt-5">
-                As Founder and Clinical Director, Bridget sets the standard of care at the clinic, from your first consultation to the aftercare that protects your results.
+                {site.founder.name} started SKNN LAB so that every client gets skincare guided by knowledge and delivered with real care. As Clinical Director, she sets the standard for every treatment you receive here.
               </p>
               <div className="mt-10 flex flex-wrap items-center gap-8">
                 <div>
@@ -113,7 +125,7 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Start with your skin"
             title="What would you like to change?"
-            subtitle="Choose a concern to see how we approach it and which treatments we usually recommend."
+            subtitle="Find the concern that sounds like you, see the treatments we recommend for it, and book in one tap."
           />
           <div className="mt-16">
             <ConcernExplorer />
@@ -186,16 +198,16 @@ export default function HomePage() {
           <Reveal delay={0.1} className="relative mx-auto w-full max-w-md">
             <Parallax offset={35} className="relative aspect-[4/5] overflow-hidden rounded-t-full">
               <Image
-                src="/images/founder/bridget-skin-analysis.jpg"
-                alt="Bridget Oshomah examining a client's skin under a magnifying lamp"
+                src="/images/clinic/consultation-talk.jpg"
+                alt="A client talking through her skin goals during a consultation at SKNN LAB"
                 fill
                 sizes="(min-width: 1024px) 35vw, 90vw"
                 className="scale-110 object-cover"
-                style={{ objectPosition: "50% 62%" }}
+                style={{ objectPosition: "55% 55%" }}
               />
             </Parallax>
             <div className="absolute -bottom-6 left-1/2 w-max -translate-x-1/2 rounded-full border border-[#6D5240] bg-[#3E2F25] px-6 py-3 font-sans text-sm text-cream shadow-soft">
-              <Microscope className="mr-2 inline h-4 w-4 text-gold" /> A close look at your skin
+              <Microscope className="mr-2 inline h-4 w-4 text-gold" /> A one-to-one conversation
             </div>
           </Reveal>
         </div>
@@ -207,54 +219,50 @@ export default function HomePage() {
           <SectionHeader
             eyebrow="Client results"
             title="Real skin, real progress"
-            subtitle="The same client before and after her treatment journey at SKNN LAB."
+            subtitle="The same client, photographed from each side before and after her treatment plan at SKNN LAB."
           />
-          <div className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-2">
-            {[
-              { src: "/images/results/before-1.jpg", label: "Before" },
-              { src: "/images/results/after-1.jpg", label: "After" },
-            ].map((r, i) => (
-              <Reveal key={r.src} delay={i * 0.12} as="figure" className="group">
-                <div className="relative aspect-[1280/900] overflow-hidden rounded-[1.75rem] shadow-soft">
-                  <Image
-                    src={r.src}
-                    alt={`Client's skin ${r.label.toLowerCase()} treatment at SKNN LAB`}
-                    fill
-                    sizes="(min-width: 768px) 45vw, 95vw"
-                    className="object-cover transition-transform duration-1000 ease-lux group-hover:scale-105"
-                  />
+          <div className="mx-auto mt-16 max-w-6xl space-y-10 md:space-y-14">
+            {resultPairs.map((pair, pi) => (
+              <div key={pair.side}>
+                <Reveal y={12}>
+                  <p className="mb-5 !text-center font-sans text-sm font-medium text-eyebrow">{pair.side}</p>
+                </Reveal>
+                <div className="relative grid gap-4 sm:grid-cols-2 md:gap-6">
+                  {pair.images.map((r, i) => (
+                    <Reveal key={r.src} delay={pi * 0.05 + i * 0.12} as="figure" className="group">
+                      <div className="relative aspect-[1200/846] overflow-hidden rounded-[1.75rem] shadow-soft">
+                        <Image
+                          src={r.src}
+                          alt={`Client's skin ${r.label.toLowerCase()} treatment, ${pair.side.toLowerCase()}`}
+                          fill
+                          sizes="(min-width: 1024px) 36rem, (min-width: 640px) 50vw, 95vw"
+                          className="object-cover transition-transform duration-1000 ease-lux group-hover:scale-105"
+                        />
+                      </div>
+                    </Reveal>
+                  ))}
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-1/2 top-1/2 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-bg bg-primary font-sans text-lg text-on-primary shadow-soft sm:grid"
+                  >
+                    →
+                  </span>
                 </div>
-                <figcaption className="mt-4 text-center font-display text-xl italic text-ink">{r.label} treatment</figcaption>
-              </Reveal>
+              </div>
             ))}
           </div>
-          <p className="mx-auto mt-10 max-w-lg !text-center font-sans text-sm text-text/80 [hyphens:manual]">
+          <p className="mx-auto mt-12 max-w-lg !text-center font-sans text-sm text-text/80 [hyphens:manual]">
             Shared with our client&apos;s permission. Results vary from person to person, depending on skin type, concern and aftercare.
           </p>
+          <div className="mt-8 text-center">
+            <Link href="/treatments" className="btn btn-primary">
+              Explore treatments <ArrowRight className="arrow h-4 w-4" />
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* 8. Inside the clinic */}
-      <section className="surface-dark section overflow-hidden bg-deep-section">
-        <div className="container">
-          <SectionHeader
-            eyebrow="Inside the clinic"
-            title="A calm space, made for you"
-            subtitle="Clean, quiet and considered, from the lounge to the treatment room."
-            light
-          />
-        </div>
-        <div className="mt-16">
-          <PhotoMarquee />
-        </div>
-        <div className="mt-12 text-center">
-          <a href={site.social.instagram.url} target="_blank" rel="noreferrer" className="btn btn-light">
-            <InstagramIcon className="h-4 w-4" /> Follow {site.social.instagram.handle}
-          </a>
-        </div>
-      </section>
-
-      {/* 9. Shop */}
+      {/* 8. Shop */}
       <section className="section bg-tone-2">
         <div className="container">
           <SectionHeader
@@ -277,7 +285,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 10. FAQ */}
+      {/* 9. FAQ */}
       <section className="section">
         <div className="container">
           <SectionHeader
