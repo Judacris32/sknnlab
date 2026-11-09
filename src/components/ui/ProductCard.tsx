@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Product } from "@/data/products";
+import { shopOpen, type Product } from "@/data/products";
 import { formatPrice, whatsappLink } from "@/lib/utils";
 import { WhatsAppIcon } from "./icons";
 
@@ -15,7 +15,7 @@ export function ProductCard({ p }: { p: Product }) {
           sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
         />
-        {p.bestseller && (
+        {shopOpen && p.bestseller && (
           <span className="absolute left-4 top-4 rounded-full bg-bg/90 px-3 py-1 font-sans text-[0.64rem] font-medium uppercase tracking-[0.2em] text-eyebrow backdrop-blur">
             Bestseller
           </span>
@@ -27,17 +27,23 @@ export function ProductCard({ p }: { p: Product }) {
           <Link href={`/shop/${p.slug}`} className="transition-colors hover:text-accent dark:hover:text-primary">{p.name}</Link>
         </h3>
         <p className="mt-2 flex-1 text-[0.95rem]">{p.short}</p>
-        <div className="mt-5 flex items-center justify-between gap-3">
-          <span className="font-sans text-lg font-medium text-ink">{formatPrice(p.price)}</span>
-          <a
-            href={whatsappLink(`Hello SKNN LAB, I'd like to order the ${p.name} (${formatPrice(p.price)}).`)}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-ghost !px-4 !py-2.5 !text-[0.7rem]"
-          >
-            <WhatsAppIcon className="h-4 w-4" /> Order
-          </a>
-        </div>
+        {shopOpen ? (
+          <div className="mt-5 flex items-center justify-between gap-3">
+            <span className="font-sans text-lg font-medium text-ink">{formatPrice(p.price)}</span>
+            <a
+              href={whatsappLink(`Hello SKNN LAB, I'd like to order the ${p.name} (${formatPrice(p.price)}).`)}
+              target="_blank"
+              rel="noreferrer"
+              className="btn btn-ghost !px-4 !py-2.5 !text-[0.7rem]"
+            >
+              <WhatsAppIcon className="h-4 w-4" /> Order
+            </a>
+          </div>
+        ) : (
+          <p className="mt-5 inline-flex w-fit items-center gap-2 rounded-full border border-primary/60 px-4 py-1.5 font-sans text-sm font-medium text-eyebrow">
+            <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" /> Coming soon
+          </p>
+        )}
       </div>
     </article>
   );

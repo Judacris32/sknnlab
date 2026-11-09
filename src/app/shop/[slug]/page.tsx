@@ -8,7 +8,7 @@ import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { WhatsAppIcon } from "@/components/ui/icons";
-import { getProduct, products } from "@/data/products";
+import { getProduct, products, shopOpen } from "@/data/products";
 import { formatPrice, whatsappLink } from "@/lib/utils";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -33,7 +33,9 @@ export default async function ProductPage({ params }: Props) {
   const p = getProduct(slug);
   if (!p) notFound();
   const related = products.filter((x) => x.slug !== p.slug).slice(0, 4);
-  const orderMessage = `Hello SKNN LAB, I'd like to order the ${p.name} (${p.size}, ${formatPrice(p.price)}).`;
+  const orderMessage = shopOpen
+    ? `Hello SKNN LAB, I'd like to order the ${p.name} (${p.size}, ${formatPrice(p.price)}).`
+    : `Hello SKNN LAB, please let me know when the ${p.name} is available.`;
 
   return (
     <>
@@ -60,7 +62,13 @@ export default async function ProductPage({ params }: Props) {
             <p className="eyebrow mt-10 !text-left">{p.category}</p>
             <h2 className="mt-4 text-4xl md:text-5xl">{p.name}</h2>
             <div className="mt-5 flex items-baseline gap-4">
-              <span className="font-display text-3xl text-ink">{formatPrice(p.price)}</span>
+              {shopOpen ? (
+                <span className="font-display text-3xl text-ink">{formatPrice(p.price)}</span>
+              ) : (
+                <span className="inline-flex items-center gap-2 rounded-full border border-primary/60 px-4 py-1.5 font-sans text-sm font-medium text-eyebrow">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" /> Coming soon
+                </span>
+              )}
               <span className="font-sans text-sm text-text">{p.size}</span>
             </div>
             <div className="mt-7 h-px w-16 bg-primary" />
@@ -98,14 +106,16 @@ export default async function ProductPage({ params }: Props) {
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <a href={whatsappLink(orderMessage)} target="_blank" rel="noreferrer" className="btn btn-primary flex-1">
-                <WhatsAppIcon className="h-4 w-4" /> Order on WhatsApp
+                <WhatsAppIcon className="h-4 w-4" /> {shopOpen ? "Order on WhatsApp" : "Ask about availability"}
               </a>
               <Link href="/book?treatment=consultation" className="btn btn-ghost flex-1">
                 Get a skin consultation
               </Link>
             </div>
             <p className="mt-5 text-sm text-text/80">
-              Payment and pickup or delivery are confirmed directly with the clinic on WhatsApp.
+              {shopOpen
+                ? "Payment and pickup or delivery are confirmed directly with the clinic on WhatsApp."
+                : "This product isn't available to order yet. Message us and we'll let you know when it is."}
             </p>
           </Reveal>
         </div>

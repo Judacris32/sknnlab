@@ -6,6 +6,7 @@ import { TreatmentMarquee } from "@/components/home/TreatmentMarquee";
 import { ConcernExplorer } from "@/components/home/ConcernExplorer";
 import { CategoryGrid } from "@/components/home/CategoryGrid";
 import { Journey } from "@/components/home/Journey";
+import { SkinAnalysis } from "@/components/home/SkinAnalysis";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { ProductCard } from "@/components/ui/ProductCard";
 import { Accordion } from "@/components/ui/Accordion";
@@ -213,7 +214,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 7. Results */}
+      {/* 7. Inside a skin analysis (trust: how Bridget works) */}
+      <section className="section overflow-hidden bg-tone">
+        <div className="container">
+          <SkinAnalysis />
+        </div>
+      </section>
+
+      {/* 8. Results */}
       <section className="section bg-bg">
         <div className="container">
           <SectionHeader
@@ -262,13 +270,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 8. Shop */}
+      {/* 9. Shop */}
       <section className="section bg-tone-2">
         <div className="container">
           <SectionHeader
             eyebrow="The SKNN LAB shop"
             title="Take the clinic home"
-            subtitle="Skincare chosen by our practitioners to protect your results between visits. Order in a tap on WhatsApp."
+            subtitle="Skincare chosen by our practitioners to protect your results between visits. Our shop is opening soon."
           />
           <div className="no-scrollbar -mx-5 mt-16 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-x-6 sm:gap-y-14 sm:overflow-visible sm:px-0 lg:grid-cols-4">
             {products.slice(0, 4).map((p, i) => (
@@ -285,7 +293,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 9. FAQ */}
+      {/* 10. FAQ */}
       <section className="section">
         <div className="container">
           <SectionHeader

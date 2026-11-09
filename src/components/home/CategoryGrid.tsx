@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { categories, fromPrice, treatmentsIn } from "@/data/treatments";
-import { formatPrice } from "@/lib/utils";
+import { categories } from "@/data/treatments";
 import { Reveal } from "@/components/motion/Reveal";
 
 /** Treatment categories as photo cards: two feature cards, then three. */
@@ -10,8 +9,6 @@ export function CategoryGrid() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
       {categories.map((c, i) => {
-        const count = treatmentsIn(c.slug).length;
-        const price = fromPrice(c.slug);
         const feature = i < 2;
         return (
           <Reveal key={c.slug} delay={i * 0.07} className={feature ? "lg:col-span-3" : "lg:col-span-2"}>
@@ -28,9 +25,6 @@ export function CategoryGrid() {
                   className="object-cover transition-transform duration-[1200ms] ease-lux group-hover:scale-105"
                   style={{ objectPosition: c.imagePosition }}
                 />
-                <span className="absolute left-5 top-5 rounded-full bg-bg/90 px-3.5 py-1.5 font-sans text-xs font-medium text-ink backdrop-blur">
-                  {count} {count === 1 ? "treatment" : "treatments"}
-                </span>
               </div>
               <div className="flex flex-1 flex-col p-7">
                 <div className="flex items-start justify-between gap-4">
@@ -41,7 +35,7 @@ export function CategoryGrid() {
                 </div>
                 <p className="mt-3 flex-1 text-[0.97rem]">{c.short}</p>
                 <p className="mt-5 border-t border-line pt-4 !text-left font-sans text-sm font-medium text-eyebrow">
-                  {price !== null ? `From ${formatPrice(price)}` : "Priced at consultation"}
+                  See treatments and details
                 </p>
               </div>
             </Link>

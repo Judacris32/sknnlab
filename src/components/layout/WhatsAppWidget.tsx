@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, X } from "lucide-react";
 import Link from "next/link";
 import { getCategory } from "@/data/treatments";
-import { getProduct } from "@/data/products";
+import { getProduct, shopOpen } from "@/data/products";
 import { whatsappLink } from "@/lib/utils";
 import { WhatsAppIcon } from "@/components/ui/icons";
 
@@ -20,7 +20,7 @@ function contextMessage(pathname: string) {
   }
   if (section === "shop" && slug) {
     const p = getProduct(slug);
-    if (p) return `Hello SKNN LAB, I'd like to order the ${p.name}.`;
+    if (p) return shopOpen ? `Hello SKNN LAB, I'd like to order the ${p.name}.` : `Hello SKNN LAB, please let me know when the ${p.name} is available.`;
   }
   if (section === "shop") return "Hello SKNN LAB, I'd like to ask about your skincare products.";
   if (section === "book") return "Hello SKNN LAB, I have a question about booking an appointment.";
@@ -50,7 +50,9 @@ export function WhatsAppWidget() {
   const quick = [
     { label: "Ask a question", message: contextMessage(pathname) },
     { label: "Book a consultation", message: "Hello SKNN LAB, I'd like to book a skin consultation." },
-    { label: "Order a product", message: "Hello SKNN LAB, I'd like to order a product from your shop." },
+    shopOpen
+      ? { label: "Order a product", message: "Hello SKNN LAB, I'd like to order a product from your shop." }
+      : { label: "Ask about products", message: "Hello SKNN LAB, I'd like to ask about your skincare products." },
   ];
   // de-duplicate when on the shop page
   const options = quick.filter((q, i, arr) => arr.findIndex((x) => x.message === q.message) === i);

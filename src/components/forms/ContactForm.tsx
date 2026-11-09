@@ -154,7 +154,7 @@ export function ContactForm() {
           </select>
           <p className="mt-2 !text-left text-xs text-sand/70 dark:text-espresso/60">
             Ready to book? Use our{" "}
-            <Link href={service && service !== "general" && service !== "products" ? `/book?treatment=${service}` : "/book"} className="underline underline-offset-2 hover:text-gold dark:hover:text-accent">
+            <Link href={service && !["general", "products"].includes(service) ? `/book?treatment=${service}` : "/book"} className="underline underline-offset-2 hover:text-gold dark:hover:text-accent">
               booking form
             </Link>{" "}
             to request a time.

@@ -4,11 +4,12 @@ import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Reveal } from "@/components/motion/Reveal";
 import { ShopGrid } from "@/components/shop/ShopGrid";
+import { shopOpen } from "@/data/products";
 
 export const metadata: Metadata = {
   title: "Shop Skincare",
   description:
-    "Practitioner-selected skincare from SKNN LAB Aesthetic Clinic, Lekki. Browse cleansers, serums, moisturisers and SPF, and order on WhatsApp.",
+    "Practitioner-selected skincare from SKNN LAB Aesthetic Clinic, Lekki. Our skincare shop is opening soon.",
   alternates: { canonical: "/shop" },
 };
 
@@ -28,10 +29,15 @@ export default function ShopPage() {
         eyebrow="The SKNN LAB shop"
         title="Skincare our practitioners trust"
         italicFrom={2}
-        subtitle="Products chosen to support your treatments and protect your results at home. Order in a tap on WhatsApp."
+        subtitle={
+          shopOpen
+            ? "Products chosen to support your treatments and protect your results at home. Order in a tap on WhatsApp."
+            : "Products chosen to support your treatments and protect your results at home. Our shop opens soon."
+        }
         crumbs={[{ label: "Shop" }]}
       />
 
+      {shopOpen ? (
       <section className="section pb-0">
         <div className="container">
           <div className="grid gap-5 md:grid-cols-3">
@@ -51,6 +57,19 @@ export default function ShopPage() {
           </div>
         </div>
       </section>
+      ) : (
+      <section className="section pb-0">
+        <div className="container">
+          <Reveal className="mx-auto max-w-3xl rounded-[2rem] border border-primary/50 bg-tone p-8 text-center md:p-10">
+            <p className="eyebrow">Coming soon</p>
+            <h2 className="mt-4 text-[2.2rem] leading-tight md:text-[2.8rem]">Our skincare shop opens soon</h2>
+            <p className="mx-auto mt-4 max-w-xl !text-center [hyphens:manual]">
+              Here&apos;s a preview of the range we&apos;re preparing. Until it launches, ask us on WhatsApp what we recommend for your skin, or book a consultation for a routine made for you.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+      )}
 
       <section className="section">
         <div className="container">

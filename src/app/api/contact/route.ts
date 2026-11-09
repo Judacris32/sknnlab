@@ -26,7 +26,11 @@ export async function POST(req: Request) {
   }
   const d = parsed.data;
   const service =
-    d.service === "products" ? "Shop products" : d.service === "general" ? "General question" : (getTreatment(d.service ?? "")?.name ?? "");
+    d.service === "products"
+      ? "Shop products"
+      : d.service === "general"
+        ? "General question"
+        : (getTreatment(d.service ?? "")?.name ?? "");
 
   const resend = getResend();
   if (!resend) {

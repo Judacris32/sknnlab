@@ -5,6 +5,13 @@
  * (Square or 5:6 portrait photos on a plain background work best.)
  */
 
+/**
+ * The shop is in preview: no prices or "bestseller" labels are shown and every
+ * product reads "Coming soon". When the clinic's real products are ready,
+ * replace the placeholders below and set this to true.
+ */
+export const shopOpen = false;
+
 export type Product = {
   slug: string;
   name: string;

@@ -17,7 +17,7 @@ export default function ContactPage() {
   const cards = [
     { icon: MapPin, title: "Visit", lines: [site.address.line1, site.address.line2, site.address.city], href: mapLinkUrl, cta: "Get directions" },
     { icon: Phone, title: "Call", lines: site.contact.phones.map((p) => p.display), href: `tel:${site.contact.phones[0].tel}`, cta: "Call now" },
-    { icon: WhatsAppIcon, title: "WhatsApp", lines: ["Questions, bookings", "and product orders"], href: whatsappLink("Hello SKNN LAB, I'd like to make an enquiry."), cta: "Start a chat" },
+    { icon: WhatsAppIcon, title: "WhatsApp", lines: ["Questions about treatments", "and bookings"], href: whatsappLink("Hello SKNN LAB, I'd like to make an enquiry."), cta: "Start a chat" },
     { icon: Mail, title: "Email", lines: [site.contact.email, "Bookings and enquiries"], href: `mailto:${site.contact.email}`, cta: "Send an email" },
   ];
 
