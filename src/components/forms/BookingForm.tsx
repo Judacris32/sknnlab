@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, CalendarDays, Check, Clock, LoaderCircle, Moon, Sun, Sunrise } from "lucide-react";
-import { categories, getTreatment, treatments } from "@/data/treatments";
+import { categories, describeTreatment, getTreatment, treatments } from "@/data/treatments";
 import { bookingSchema, fieldErrors, timeWindows, todayInLagos } from "@/lib/validation";
 import { cn, formatPrice, whatsappLink } from "@/lib/utils";
 import { site } from "@/config/site";
@@ -152,7 +152,7 @@ export function BookingForm({ initialTreatment }: { initialTreatment?: string })
           </select>
           {errors.treatment && <p id="treatment-error" className="field-error">{errors.treatment}</p>}
           <p className="mt-2 !text-left text-sm text-text/80">
-            Not sure? Choose <button type="button" className="text-accent underline underline-offset-2 dark:text-primary" onClick={() => setTreatment("consultation")}>Skin Consultation</button> and we&apos;ll guide you.
+            Not sure? Choose <button type="button" className="text-accent underline underline-offset-2 dark:text-primary" onClick={() => setTreatment("consultation")}>a consultation</button> and we&apos;ll guide you.
           </p>
         </div>
 
@@ -322,7 +322,7 @@ export function BookingForm({ initialTreatment }: { initialTreatment?: string })
                       )}
                     </div>
                     <div className="my-5 h-px w-12 bg-[#D4AF7C]" />
-                    <p className="text-[0.95rem] text-[#D9C1A4]">{selected.summary}</p>
+                    <p className="text-[0.95rem] text-[#D9C1A4]">{describeTreatment(selected)}</p>
                   </>
                 ) : (
                   <>

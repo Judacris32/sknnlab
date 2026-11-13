@@ -3,17 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
-import { TreatmentRow } from "@/components/ui/TreatmentRow";
+import { TreatmentMenu } from "@/components/ui/TreatmentMenu";
 import { CategoryNav } from "@/components/treatments/CategoryNav";
 import { Reveal } from "@/components/motion/Reveal";
 import { Parallax } from "@/components/motion/Parallax";
 import { SplitWords } from "@/components/motion/SplitWords";
-import { categories, treatmentsIn } from "@/data/treatments";
+import { categories } from "@/data/treatments";
 
 export const metadata: Metadata = {
   title: "Treatments & Prices",
   description:
-    "Facials, microneedling, chemical peels, skin consultations and advanced treatments at SKNN LAB in Lekki, Lagos. See the full menu with prices and times.",
+    "Facials, microneedling, chemical peels, skin tag and DPN removal, waxing, massage and skin consultations at SKNN LAB in Lekki, Lagos. See the full menu with prices and times.",
   alternates: { canonical: "/treatments" },
 };
 
@@ -35,7 +35,6 @@ export default function TreatmentsPage() {
 
       <div className="container">
         {categories.map((c, ci) => {
-          const list = treatmentsIn(c.slug);
           return (
             <section key={c.slug} id={c.slug} className="scroll-mt-40 border-b border-line py-24 last:border-b-0 md:py-32">
               <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -59,12 +58,8 @@ export default function TreatmentsPage() {
                       Learn more about {c.name.toLowerCase()} <ArrowUpRight className="h-3.5 w-3.5" />
                     </Link>
                   </Reveal>
-                  <div className="mt-8 border-t border-line">
-                    {list.map((t, i) => (
-                      <Reveal key={t.slug} delay={Math.min(i, 4) * 0.05} y={20}>
-                        <TreatmentRow t={t} />
-                      </Reveal>
-                    ))}
+                  <div className="mt-10">
+                    <TreatmentMenu category={c.slug} />
                   </div>
                   {ci === 0 && (
                     <Reveal className="mt-10 rounded-[1.5rem] bg-soft/60 p-7 dark:bg-surface/60">

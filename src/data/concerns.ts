@@ -15,8 +15,8 @@ export const concerns: Concern[] = [
     name: "Acne & breakouts",
     line: "Calm active spots and keep pores clear.",
     text: "Breakouts happen when oil, dead skin and bacteria build up in the pores. We clear the congestion, calm the inflammation and help stop new spots from forming.",
-    image: "/images/treatments/high-frequency.jpg",
-    position: "50% 40%",
+    image: "/images/treatments/concern-acne-breakouts.jpg",
+    position: "55% 50%",
     treatments: ["acne-control-facial", "acne-corrective-peel", "acne-facial-corrective-peel"],
   },
   {
@@ -26,15 +26,15 @@ export const concerns: Concern[] = [
     text: "Dark marks are extra pigment your skin produces after a breakout, sun exposure or irritation. Targeted peels and microneedling break it up gradually for a clearer, even tone.",
     image: "/images/treatments/concern-dark-spots.jpg",
     position: "45% 50%",
-    treatments: ["micro-droplets-peel", "medium-depth-peel", "microneedling-c-prof"],
+    treatments: ["superficial-peel", "medium-depth-peel", "microneedling-c-prof"],
   },
   {
     slug: "ageing",
     name: "Fine lines & firmness",
     line: "Rebuild collagen for smoother, firmer skin.",
     text: "From our late twenties, collagen slowly declines and lines begin to settle. Collagen-boosting treatments help your skin rebuild its own support.",
-    image: "/images/treatments/microneedling.jpg",
-    position: "50% 45%",
+    image: "/images/treatments/concern-ageing.jpg",
+    position: "45% 45%",
     treatments: ["microneedling-anti-ageing", "microneedling-chemical-peel", "brightening-signature-facial"],
   },
   {
@@ -62,6 +62,6 @@ export const concerns: Concern[] = [
     text: "Body acne and darker knuckles, elbows, knees or feet are common and very treatable. Our body treatments are tailored to the area and your goals.",
     image: "/images/treatments/concern-body.jpg",
     position: "50% 40%",
-    treatments: ["signature-body-peel", "back-facial"],
+    treatments: ["full-back-peel", "full-arm-peel", "back-facial"],
   },
 ];

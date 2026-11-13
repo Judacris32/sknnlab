@@ -1,9 +1,14 @@
 import { site } from "@/config/site";
+import { getTreatment } from "@/data/treatments";
+import { formatPrice } from "@/lib/utils";
+
+const inClinic = formatPrice(getTreatment("consultation")?.price ?? null);
+const online = formatPrice(getTreatment("virtual-consultation")?.price ?? null);
 
 export const generalFaqs = [
   {
     q: "I'm not sure which treatment I need. Where do I start?",
-    a: "Book a skin consultation. In 30 minutes we'll examine your skin, talk through your goals and recommend a plan. It costs ₦10,000 and is available in the clinic or online.",
+    a: `Book a consultation. We'll examine your skin, talk through your goals and recommend a plan. It's ${inClinic} at the clinic or ${online} online.`,
   },
   {
     q: "How does booking work?",

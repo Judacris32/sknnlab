@@ -7,7 +7,8 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } fr
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { DropDivider } from "@/components/ui/icons";
 import { SplitWords } from "@/components/motion/SplitWords";
-import { cn } from "@/lib/utils";
+import { cn, formatPrice } from "@/lib/utils";
+import { fromPrice } from "@/data/treatments";
 
 type Slide = {
   image: string;
@@ -181,7 +182,7 @@ export function HeroSlideshow() {
       <div className="absolute inset-x-0 bottom-0 border-t border-white/15 bg-gradient-to-t from-black/30 to-transparent backdrop-blur-[2px]">
         <div className="container flex items-center justify-between gap-6 py-5">
           <ul className="hidden items-center gap-8 font-sans text-[0.8rem] text-white/85 lg:flex">
-            <li>Consultations from ₦10,000</li>
+            <li>Consultations from {formatPrice(fromPrice("consultation"))}</li>
             <li className="h-4 w-px bg-white/30" aria-hidden="true" />
             <li>In clinic or online</li>
             <li className="h-4 w-px bg-white/30" aria-hidden="true" />

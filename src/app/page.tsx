@@ -39,6 +39,8 @@ const resultPairs = [
 
 export default function HomePage() {
   const consultation = getTreatment("consultation")!;
+  const virtual = getTreatment("virtual-consultation")!;
+  const analysis = getTreatment("skin-analysis")!;
 
   return (
     <>
@@ -178,9 +180,9 @@ export default function HomePage() {
               <p className="mt-8 text-sand">{consultation.summary}</p>
               <dl className="mt-10 grid grid-cols-3 gap-4 border-y border-[#6D5240] py-7">
                 {[
-                  ["Fee", formatPrice(consultation.price)],
-                  ["Duration", consultation.duration ?? ""],
-                  ["Where", "Clinic or online"],
+                  ["In clinic", formatPrice(consultation.price)],
+                  ["Online", formatPrice(virtual.price)],
+                  ["Face analysis", formatPrice(analysis.price)],
                 ].map(([k, v]) => (
                   <div key={k}>
                     <dt className="font-sans text-[0.7rem] uppercase tracking-[0.24em] text-gold">{k}</dt>

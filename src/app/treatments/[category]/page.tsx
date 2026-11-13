@@ -5,14 +5,14 @@ import { notFound } from "next/navigation";
 import { AlertCircle, ArrowUpRight, Check, Sparkles } from "lucide-react";
 import { PageHero } from "@/components/ui/PageHero";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { TreatmentRow } from "@/components/ui/TreatmentRow";
+import { TreatmentMenu } from "@/components/ui/TreatmentMenu";
 import { Accordion } from "@/components/ui/Accordion";
 import { WhatsAppIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/motion/Reveal";
 import { Parallax } from "@/components/motion/Parallax";
 import { SplitWords } from "@/components/motion/SplitWords";
-import { categories, getCategory, treatmentsIn } from "@/data/treatments";
-import { whatsappLink } from "@/lib/utils";
+import { categories, fromPrice, FROM_PRICE, getCategory, treatmentsIn } from "@/data/treatments";
+import { formatPrice, whatsappLink } from "@/lib/utils";
 
 type Props = { params: Promise<{ category: string }> };
 
@@ -59,7 +59,9 @@ export default async function CategoryPage({ params }: Props) {
             {d.facts.map((f, i) => (
               <Reveal key={f.label} delay={i * 0.08} className="px-3 py-8 text-center md:py-10">
                 <dt className="font-sans text-[0.68rem] uppercase tracking-[0.24em] text-eyebrow">{f.label}</dt>
-                <dd className="mt-2 font-display text-[1.35rem] leading-tight text-ink md:text-[2rem]">{f.value}</dd>
+                <dd className="mt-2 font-display text-[1.35rem] leading-tight text-ink md:text-[2rem]">
+                  {f.value === FROM_PRICE ? formatPrice(fromPrice(c.slug)) : f.value}
+                </dd>
               </Reveal>
             ))}
           </dl>
@@ -158,16 +160,12 @@ export default async function CategoryPage({ params }: Props) {
       <section className="section bg-surface/70 dark:bg-surface/30">
         <div className="container">
           <SectionHeader
-            eyebrow={`${list.length} ${list.length === 1 ? "option" : "options"}`}
+            eyebrow="The menu"
             title={`${c.name} menu`}
             subtitle="Prices and times are below. Tap the arrow on any treatment to request it."
           />
-          <div className="mx-auto mt-14 max-w-5xl border-t border-line">
-            {list.map((t, i) => (
-              <Reveal key={t.slug} delay={Math.min(i, 4) * 0.05} y={20}>
-                <TreatmentRow t={t} />
-              </Reveal>
-            ))}
+          <div className="mx-auto mt-14 max-w-5xl">
+            <TreatmentMenu category={c.slug} />
           </div>
 
           {d?.extraList && (
@@ -184,8 +182,9 @@ export default async function CategoryPage({ params }: Props) {
           )}
 
           <div className="mt-14 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Link href={`/book?treatment=${list[0]?.slug ?? ""}`} className="btn btn-primary">
-              Book this treatment
+            {/* Short menus preselect the first treatment; long ones let the client choose on the booking page. */}
+            <Link href={list.length <= 3 ? `/book?treatment=${list[0]?.slug ?? ""}` : "/book"} className="btn btn-primary">
+              {list.length <= 3 ? "Book this treatment" : "Book an appointment"}
             </Link>
             <a href={whatsappLink(`Hello SKNN LAB, I'd like to ask about your ${c.name} treatments.`)} target="_blank" rel="noreferrer" className="btn btn-ghost">
               <WhatsAppIcon className="h-4 w-4" /> Ask us a question
@@ -210,9 +209,9 @@ export default async function CategoryPage({ params }: Props) {
       <section className={d?.faqs ? "pb-12" : "section pb-12"}>
         <div className="container">
           <SectionHeader eyebrow="Keep exploring" title="More ways to care for your skin" />
-          <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-14 flex flex-wrap justify-center gap-4">
             {others.map((o, i) => (
-              <Reveal key={o.slug} delay={i * 0.06}>
+              <Reveal key={o.slug} delay={(i % 4) * 0.06} className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(25%-0.75rem)]">
                 <Link href={`/treatments/${o.slug}`} className="group relative flex h-72 items-end overflow-hidden rounded-[1.75rem] bg-espresso p-6">
                   <Image src={o.image} alt="" fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover opacity-90 transition-transform duration-1000 ease-lux group-hover:scale-110" style={{ objectPosition: o.imagePosition }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-[rgba(30,22,17,0.92)] via-[rgba(30,22,17,0.3)] to-transparent" />

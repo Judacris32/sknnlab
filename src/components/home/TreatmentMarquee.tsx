@@ -1,7 +1,7 @@
 import { Marquee } from "@/components/motion/Marquee";
 import { DropIcon } from "@/components/ui/icons";
 
-const top = ["Hydra Facial", "Chemical Peels", "Microneedling", "Acne Control", "Skin Consultations", "Dermaplaning", "Brightening Facials", "Body Peels"];
+const top = ["Hydra Facial", "Chemical Peels", "Microneedling", "Skin Consultations", "Massage", "Brightening Facials", "Body Peels", "Waxing", "Skin Tag Removal"];
 const bottom = ["Clearer skin", "Even tone", "Lasting glow", "Smoother texture", "Healthy barrier", "Real confidence"];
 
 export function TreatmentMarquee() {

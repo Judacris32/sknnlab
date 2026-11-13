@@ -99,7 +99,7 @@ export function SkinAnalysis() {
             ))}
           </ul>
           <Link href="/book?treatment=skin-analysis" className="btn btn-primary mt-10">
-            Book a skin analysis <ArrowRight className="arrow h-4 w-4" />
+            Book a face analysis <ArrowRight className="arrow h-4 w-4" />
           </Link>
         </Reveal>
       </div>

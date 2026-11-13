@@ -4,12 +4,16 @@ import { ArrowUpRight } from "lucide-react";
 import { categories } from "@/data/treatments";
 import { Reveal } from "@/components/motion/Reveal";
 
-/** Treatment categories as photo cards: two feature cards, then three. */
+/**
+ * Treatment categories as photo cards: two wide feature cards, then rows of three.
+ * If the last row would hold only two, those two become wide cards too, so rows stay even.
+ */
 export function CategoryGrid() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-6">
       {categories.map((c, i) => {
-        const feature = i < 2;
+        const rest = categories.length - 2;
+        const feature = i < 2 || (rest % 3 === 2 && i >= categories.length - 2);
         return (
           <Reveal key={c.slug} delay={i * 0.07} className={feature ? "lg:col-span-3" : "lg:col-span-2"}>
             <Link

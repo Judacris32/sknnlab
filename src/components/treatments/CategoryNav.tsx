@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { categories } from "@/data/treatments";
 import { getLenis } from "@/components/motion/SmoothScroll";
@@ -9,6 +9,15 @@ import { cn } from "@/lib/utils";
 /** Sticky category tabs that follow your position on the menu. */
 export function CategoryNav() {
   const [active, setActive] = useState<string>(categories[0].slug);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Keep the active tab in view when the tabs scroll sideways on smaller screens.
+  useEffect(() => {
+    const nav = navRef.current;
+    const tab = nav?.querySelector<HTMLElement>(`[data-cat="${active}"]`);
+    if (!nav || !tab || nav.scrollWidth <= nav.clientWidth) return;
+    nav.scrollTo({ left: tab.offsetLeft - nav.clientWidth / 2 + tab.offsetWidth / 2, behavior: "smooth" });
+  }, [active]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -34,10 +43,12 @@ export function CategoryNav() {
 
   return (
     <div className="sticky top-[80px] z-30 border-b border-line/70 bg-bg/90 backdrop-blur-xl">
-      <nav aria-label="Treatment categories" className="no-scrollbar container flex justify-start gap-1 overflow-x-auto py-3 md:justify-center">
-        {categories.map((c) => (
+      <nav ref={navRef} aria-label="Treatment categories" className="no-scrollbar container relative overflow-x-auto py-3">
+        <div className="mx-auto flex w-max gap-1">
+          {categories.map((c) => (
           <button
             key={c.slug}
+            data-cat={c.slug}
             type="button"
             onClick={() => jump(c.slug)}
             aria-current={active === c.slug ? "true" : undefined}
@@ -52,6 +63,7 @@ export function CategoryNav() {
             <span className="relative">{c.name}</span>
           </button>
         ))}
+        </div>
       </nav>
     </div>
   );
