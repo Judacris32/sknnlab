@@ -21,12 +21,9 @@ const treatmentsInAction: Photo[] = [
   { src: "/images/treatments/microneedling-session.jpg", alt: "A microneedling session at SKNN LAB", pos: "50% 55%", wide: true },
   { src: "/images/treatments/high-frequency.jpg", alt: "High-frequency therapy during a facial", pos: "50% 40%" },
   { src: "/images/founder/bridget-with-client.jpg", alt: "Bridget Oshomah with a client before a treatment", pos: "50% 50%", wide: true },
-  { src: "/images/treatments/hydra-machine.jpg", alt: "The hydra facial machine", pos: "50% 40%" },
   { src: "/images/treatments/facial-mask.jpg", alt: "A client with a facial mask", pos: "50% 40%" },
   { src: "/images/clinic/analysis-results.jpg", alt: "Skin analysis results being explained", pos: "50% 35%", wide: true },
   { src: "/images/treatments/microneedling-pen.jpg", alt: "A microneedling pen", pos: "50% 50%" },
-  { src: "/images/treatments/brushes.jpg", alt: "Treatment brushes", pos: "50% 50%" },
-  { src: "/images/treatments/tools-dark.jpg", alt: "Treatment tools", pos: "50% 50%" },
 ];
 
 function Row({ photos, reverse, duration }: { photos: Photo[]; reverse?: boolean; duration: number }) {
