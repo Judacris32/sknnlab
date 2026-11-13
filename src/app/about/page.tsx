@@ -195,7 +195,7 @@ export default function AboutPage() {
       {/* Inside the clinic */}
       <section className="surface-dark section overflow-hidden bg-deep-section">
         <div className="container">
-          <SectionHeader eyebrow="Inside the clinic" title="A space made for you" subtitle="Calm, clean and considered, from the reception lounge to our treatment rooms." light />
+          <SectionHeader eyebrow="Inside the clinic" title="A space made for you" subtitle="Real moments from our clinic: the space, the team and the treatments we carry out every day." light />
         </div>
         <div className="mt-16">
           <PhotoMarquee />
